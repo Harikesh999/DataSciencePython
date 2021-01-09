@@ -1,0 +1,2445 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled0.ipynb",
+      "provenance": [],
+      "collapsed_sections": [],
+      "toc_visible": true,
+      "authorship_tag": "ABX9TyNiCRfa8aULyIMwS4GKwra3",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Harikesh999/DataSciencePython/blob/main/Python%20and%20Linear%20regression%20test%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "e04QZJPfaemf"
+      },
+      "source": [
+        "#Import Python Libraries\r\n",
+        "import numpy as np\r\n",
+        "import pandas as pd\r\n",
+        "import matplotlib as mpl\r\n",
+        "import seaborn as sns\r\n"
+      ],
+      "execution_count": 9,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "atsU_q10aju1"
+      },
+      "source": [
+        "df = pd.read_csv(\"http://rcs.bu.edu/examples/python/data_analysis/Salaries.csv\")"
+      ],
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "lvu_GQTRUg_c"
+      },
+      "source": [
+        "# New Section"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "9g7Uf3OhUIyK"
+      },
+      "source": [
+        "# New Section"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 204
+        },
+        "id": "m1p37_bea4VP",
+        "outputId": "d337c3dd-776d-40d2-b0a9-5f831b2594c0"
+      },
+      "source": [
+        "#list of first few records\r\n",
+        "df.head()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>rank</th>\n",
+              "      <th>discipline</th>\n",
+              "      <th>phd</th>\n",
+              "      <th>service</th>\n",
+              "      <th>sex</th>\n",
+              "      <th>salary</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>56</td>\n",
+              "      <td>49</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>186960</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>12</td>\n",
+              "      <td>6</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>93000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>23</td>\n",
+              "      <td>20</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>110515</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>40</td>\n",
+              "      <td>31</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>131205</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>20</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>104800</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "   rank discipline  phd  service   sex  salary\n",
+              "0  Prof          B   56       49  Male  186960\n",
+              "1  Prof          A   12        6  Male   93000\n",
+              "2  Prof          A   23       20  Male  110515\n",
+              "3  Prof          A   40       31  Male  131205\n",
+              "4  Prof          B   20       18  Male  104800"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 8
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 359
+        },
+        "id": "P0Ql0AKGbTV1",
+        "outputId": "5389b81c-7db9-4291-d91a-46344fbb7bb8"
+      },
+      "source": [
+        "df[:10]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>rank</th>\n",
+              "      <th>discipline</th>\n",
+              "      <th>phd</th>\n",
+              "      <th>service</th>\n",
+              "      <th>sex</th>\n",
+              "      <th>salary</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>56</td>\n",
+              "      <td>49</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>186960</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>12</td>\n",
+              "      <td>6</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>93000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>23</td>\n",
+              "      <td>20</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>110515</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>40</td>\n",
+              "      <td>31</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>131205</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>20</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>104800</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>20</td>\n",
+              "      <td>20</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>122400</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>AssocProf</td>\n",
+              "      <td>A</td>\n",
+              "      <td>20</td>\n",
+              "      <td>17</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>81285</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>18</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>126300</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>29</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>94350</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>51</td>\n",
+              "      <td>51</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>57800</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "        rank discipline  phd  service   sex  salary\n",
+              "0       Prof          B   56       49  Male  186960\n",
+              "1       Prof          A   12        6  Male   93000\n",
+              "2       Prof          A   23       20  Male  110515\n",
+              "3       Prof          A   40       31  Male  131205\n",
+              "4       Prof          B   20       18  Male  104800\n",
+              "5       Prof          A   20       20  Male  122400\n",
+              "6  AssocProf          A   20       17  Male   81285\n",
+              "7       Prof          A   18       18  Male  126300\n",
+              "8       Prof          A   29       19  Male   94350\n",
+              "9       Prof          A   51       51  Male   57800"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 10
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 669
+        },
+        "id": "0yJLviijc6qq",
+        "outputId": "77e94f79-03bd-4712-ffdf-eed1d0a24f8d"
+      },
+      "source": [
+        "df[:20]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>rank</th>\n",
+              "      <th>discipline</th>\n",
+              "      <th>phd</th>\n",
+              "      <th>service</th>\n",
+              "      <th>sex</th>\n",
+              "      <th>salary</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>56</td>\n",
+              "      <td>49</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>186960</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>12</td>\n",
+              "      <td>6</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>93000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>23</td>\n",
+              "      <td>20</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>110515</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>40</td>\n",
+              "      <td>31</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>131205</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>20</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>104800</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>20</td>\n",
+              "      <td>20</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>122400</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>AssocProf</td>\n",
+              "      <td>A</td>\n",
+              "      <td>20</td>\n",
+              "      <td>17</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>81285</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>18</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>126300</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>29</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>94350</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>51</td>\n",
+              "      <td>51</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>57800</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>10</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>39</td>\n",
+              "      <td>33</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>128250</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>11</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>23</td>\n",
+              "      <td>23</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>134778</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>12</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>88000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>13</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>35</td>\n",
+              "      <td>33</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>162200</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>14</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>25</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>153750</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>15</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>17</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>150480</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>16</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>8</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>75044</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>17</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>4</td>\n",
+              "      <td>0</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>92000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>18</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>19</td>\n",
+              "      <td>7</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>107300</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>19</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>29</td>\n",
+              "      <td>27</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>150500</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "         rank discipline  phd  service   sex  salary\n",
+              "0        Prof          B   56       49  Male  186960\n",
+              "1        Prof          A   12        6  Male   93000\n",
+              "2        Prof          A   23       20  Male  110515\n",
+              "3        Prof          A   40       31  Male  131205\n",
+              "4        Prof          B   20       18  Male  104800\n",
+              "5        Prof          A   20       20  Male  122400\n",
+              "6   AssocProf          A   20       17  Male   81285\n",
+              "7        Prof          A   18       18  Male  126300\n",
+              "8        Prof          A   29       19  Male   94350\n",
+              "9        Prof          A   51       51  Male   57800\n",
+              "10       Prof          B   39       33  Male  128250\n",
+              "11       Prof          B   23       23  Male  134778\n",
+              "12   AsstProf          B    1        0  Male   88000\n",
+              "13       Prof          B   35       33  Male  162200\n",
+              "14       Prof          B   25       19  Male  153750\n",
+              "15       Prof          B   17        3  Male  150480\n",
+              "16   AsstProf          B    8        3  Male   75044\n",
+              "17   AsstProf          B    4        0  Male   92000\n",
+              "18       Prof          A   19        7  Male  107300\n",
+              "19       Prof          A   29       27  Male  150500"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 11
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 1000
+        },
+        "id": "MaLdGyYoc95j",
+        "outputId": "2584cc1a-3c1e-4ee5-c2c6-1222dceaa3e2"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>rank</th>\n",
+              "      <th>discipline</th>\n",
+              "      <th>phd</th>\n",
+              "      <th>service</th>\n",
+              "      <th>sex</th>\n",
+              "      <th>salary</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>56</td>\n",
+              "      <td>49</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>186960</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>12</td>\n",
+              "      <td>6</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>93000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>23</td>\n",
+              "      <td>20</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>110515</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>40</td>\n",
+              "      <td>31</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>131205</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>20</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>104800</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>20</td>\n",
+              "      <td>20</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>122400</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>AssocProf</td>\n",
+              "      <td>A</td>\n",
+              "      <td>20</td>\n",
+              "      <td>17</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>81285</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>18</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>126300</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>29</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>94350</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>51</td>\n",
+              "      <td>51</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>57800</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>10</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>39</td>\n",
+              "      <td>33</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>128250</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>11</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>23</td>\n",
+              "      <td>23</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>134778</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>12</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>88000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>13</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>35</td>\n",
+              "      <td>33</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>162200</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>14</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>25</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>153750</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>15</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>17</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>150480</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>16</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>8</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>75044</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>17</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>4</td>\n",
+              "      <td>0</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>92000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>18</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>19</td>\n",
+              "      <td>7</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>107300</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>19</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>29</td>\n",
+              "      <td>27</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>150500</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>20</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>4</td>\n",
+              "      <td>4</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>92000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>21</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>33</td>\n",
+              "      <td>30</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>103106</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>22</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>A</td>\n",
+              "      <td>4</td>\n",
+              "      <td>2</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>73000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>23</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>A</td>\n",
+              "      <td>2</td>\n",
+              "      <td>0</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>85000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>24</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>30</td>\n",
+              "      <td>23</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>91100</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>25</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>35</td>\n",
+              "      <td>31</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>99418</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>26</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>38</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>148750</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>27</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>45</td>\n",
+              "      <td>43</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>155865</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>28</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>7</td>\n",
+              "      <td>2</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>91300</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>29</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>21</td>\n",
+              "      <td>20</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>123683</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>30</th>\n",
+              "      <td>AssocProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>9</td>\n",
+              "      <td>7</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>107008</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>31</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>22</td>\n",
+              "      <td>21</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>155750</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>32</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>27</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>103275</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>33</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>18</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>120000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>34</th>\n",
+              "      <td>AssocProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>12</td>\n",
+              "      <td>8</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>119800</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>35</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>28</td>\n",
+              "      <td>23</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>126933</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>36</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>45</td>\n",
+              "      <td>45</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>146856</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>37</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>20</td>\n",
+              "      <td>8</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>102000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>38</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>4</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Male</td>\n",
+              "      <td>91000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>39</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>18</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>129000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>40</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>A</td>\n",
+              "      <td>39</td>\n",
+              "      <td>36</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>137000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>41</th>\n",
+              "      <td>AssocProf</td>\n",
+              "      <td>A</td>\n",
+              "      <td>13</td>\n",
+              "      <td>8</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>74830</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>42</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>4</td>\n",
+              "      <td>2</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>80225</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>43</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>5</td>\n",
+              "      <td>0</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>77000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>44</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>23</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>151768</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>45</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>25</td>\n",
+              "      <td>25</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>140096</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>46</th>\n",
+              "      <td>AsstProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>11</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>74692</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>47</th>\n",
+              "      <td>AssocProf</td>\n",
+              "      <td>B</td>\n",
+              "      <td>11</td>\n",
+              "      <td>11</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>103613</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>48</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>17</td>\n",
+              "      <td>17</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>111512</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>49</th>\n",
+              "      <td>Prof</td>\n",
+              "      <td>B</td>\n",
+              "      <td>17</td>\n",
+              "      <td>18</td>\n",
+              "      <td>Female</td>\n",
+              "      <td>122960</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "         rank discipline  phd  service     sex  salary\n",
+              "0        Prof          B   56       49    Male  186960\n",
+              "1        Prof          A   12        6    Male   93000\n",
+              "2        Prof          A   23       20    Male  110515\n",
+              "3        Prof          A   40       31    Male  131205\n",
+              "4        Prof          B   20       18    Male  104800\n",
+              "5        Prof          A   20       20    Male  122400\n",
+              "6   AssocProf          A   20       17    Male   81285\n",
+              "7        Prof          A   18       18    Male  126300\n",
+              "8        Prof          A   29       19    Male   94350\n",
+              "9        Prof          A   51       51    Male   57800\n",
+              "10       Prof          B   39       33    Male  128250\n",
+              "11       Prof          B   23       23    Male  134778\n",
+              "12   AsstProf          B    1        0    Male   88000\n",
+              "13       Prof          B   35       33    Male  162200\n",
+              "14       Prof          B   25       19    Male  153750\n",
+              "15       Prof          B   17        3    Male  150480\n",
+              "16   AsstProf          B    8        3    Male   75044\n",
+              "17   AsstProf          B    4        0    Male   92000\n",
+              "18       Prof          A   19        7    Male  107300\n",
+              "19       Prof          A   29       27    Male  150500\n",
+              "20   AsstProf          B    4        4    Male   92000\n",
+              "21       Prof          A   33       30    Male  103106\n",
+              "22   AsstProf          A    4        2    Male   73000\n",
+              "23   AsstProf          A    2        0    Male   85000\n",
+              "24       Prof          A   30       23    Male   91100\n",
+              "25       Prof          B   35       31    Male   99418\n",
+              "26       Prof          A   38       19    Male  148750\n",
+              "27       Prof          A   45       43    Male  155865\n",
+              "28   AsstProf          B    7        2    Male   91300\n",
+              "29       Prof          B   21       20    Male  123683\n",
+              "30  AssocProf          B    9        7    Male  107008\n",
+              "31       Prof          B   22       21    Male  155750\n",
+              "32       Prof          A   27       19    Male  103275\n",
+              "33       Prof          B   18       18    Male  120000\n",
+              "34  AssocProf          B   12        8    Male  119800\n",
+              "35       Prof          B   28       23    Male  126933\n",
+              "36       Prof          B   45       45    Male  146856\n",
+              "37       Prof          A   20        8    Male  102000\n",
+              "38   AsstProf          B    4        3    Male   91000\n",
+              "39       Prof          B   18       18  Female  129000\n",
+              "40       Prof          A   39       36  Female  137000\n",
+              "41  AssocProf          A   13        8  Female   74830\n",
+              "42   AsstProf          B    4        2  Female   80225\n",
+              "43   AsstProf          B    5        0  Female   77000\n",
+              "44       Prof          B   23       19  Female  151768\n",
+              "45       Prof          B   25       25  Female  140096\n",
+              "46   AsstProf          B   11        3  Female   74692\n",
+              "47  AssocProf          B   11       11  Female  103613\n",
+              "48       Prof          B   17       17  Female  111512\n",
+              "49       Prof          B   17       18  Female  122960"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "EdAaomv7jU9P",
+        "outputId": "1ab094b4-f40d-4d1d-8070-2b4cf2249c74"
+      },
+      "source": [
+        "df.shape\r\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(78, 6)"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 15
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "0LlTe4xvjbZ9",
+        "outputId": "7e629b8b-afd5-4387-ea69-876014cbf966"
+      },
+      "source": [
+        "df.ndim\r\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "2"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 16
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RMsRJIDIjd3B",
+        "outputId": "5fcbd199-5991-4c8b-b615-fdc213e6b27a"
+      },
+      "source": [
+        "df.values"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([['Prof', 'B', 56, 49, 'Male', 186960],\n",
+              "       ['Prof', 'A', 12, 6, 'Male', 93000],\n",
+              "       ['Prof', 'A', 23, 20, 'Male', 110515],\n",
+              "       ['Prof', 'A', 40, 31, 'Male', 131205],\n",
+              "       ['Prof', 'B', 20, 18, 'Male', 104800],\n",
+              "       ['Prof', 'A', 20, 20, 'Male', 122400],\n",
+              "       ['AssocProf', 'A', 20, 17, 'Male', 81285],\n",
+              "       ['Prof', 'A', 18, 18, 'Male', 126300],\n",
+              "       ['Prof', 'A', 29, 19, 'Male', 94350],\n",
+              "       ['Prof', 'A', 51, 51, 'Male', 57800],\n",
+              "       ['Prof', 'B', 39, 33, 'Male', 128250],\n",
+              "       ['Prof', 'B', 23, 23, 'Male', 134778],\n",
+              "       ['AsstProf', 'B', 1, 0, 'Male', 88000],\n",
+              "       ['Prof', 'B', 35, 33, 'Male', 162200],\n",
+              "       ['Prof', 'B', 25, 19, 'Male', 153750],\n",
+              "       ['Prof', 'B', 17, 3, 'Male', 150480],\n",
+              "       ['AsstProf', 'B', 8, 3, 'Male', 75044],\n",
+              "       ['AsstProf', 'B', 4, 0, 'Male', 92000],\n",
+              "       ['Prof', 'A', 19, 7, 'Male', 107300],\n",
+              "       ['Prof', 'A', 29, 27, 'Male', 150500],\n",
+              "       ['AsstProf', 'B', 4, 4, 'Male', 92000],\n",
+              "       ['Prof', 'A', 33, 30, 'Male', 103106],\n",
+              "       ['AsstProf', 'A', 4, 2, 'Male', 73000],\n",
+              "       ['AsstProf', 'A', 2, 0, 'Male', 85000],\n",
+              "       ['Prof', 'A', 30, 23, 'Male', 91100],\n",
+              "       ['Prof', 'B', 35, 31, 'Male', 99418],\n",
+              "       ['Prof', 'A', 38, 19, 'Male', 148750],\n",
+              "       ['Prof', 'A', 45, 43, 'Male', 155865],\n",
+              "       ['AsstProf', 'B', 7, 2, 'Male', 91300],\n",
+              "       ['Prof', 'B', 21, 20, 'Male', 123683],\n",
+              "       ['AssocProf', 'B', 9, 7, 'Male', 107008],\n",
+              "       ['Prof', 'B', 22, 21, 'Male', 155750],\n",
+              "       ['Prof', 'A', 27, 19, 'Male', 103275],\n",
+              "       ['Prof', 'B', 18, 18, 'Male', 120000],\n",
+              "       ['AssocProf', 'B', 12, 8, 'Male', 119800],\n",
+              "       ['Prof', 'B', 28, 23, 'Male', 126933],\n",
+              "       ['Prof', 'B', 45, 45, 'Male', 146856],\n",
+              "       ['Prof', 'A', 20, 8, 'Male', 102000],\n",
+              "       ['AsstProf', 'B', 4, 3, 'Male', 91000],\n",
+              "       ['Prof', 'B', 18, 18, 'Female', 129000],\n",
+              "       ['Prof', 'A', 39, 36, 'Female', 137000],\n",
+              "       ['AssocProf', 'A', 13, 8, 'Female', 74830],\n",
+              "       ['AsstProf', 'B', 4, 2, 'Female', 80225],\n",
+              "       ['AsstProf', 'B', 5, 0, 'Female', 77000],\n",
+              "       ['Prof', 'B', 23, 19, 'Female', 151768],\n",
+              "       ['Prof', 'B', 25, 25, 'Female', 140096],\n",
+              "       ['AsstProf', 'B', 11, 3, 'Female', 74692],\n",
+              "       ['AssocProf', 'B', 11, 11, 'Female', 103613],\n",
+              "       ['Prof', 'B', 17, 17, 'Female', 111512],\n",
+              "       ['Prof', 'B', 17, 18, 'Female', 122960],\n",
+              "       ['AsstProf', 'B', 10, 5, 'Female', 97032],\n",
+              "       ['Prof', 'B', 20, 14, 'Female', 127512],\n",
+              "       ['Prof', 'A', 12, 0, 'Female', 105000],\n",
+              "       ['AsstProf', 'A', 5, 3, 'Female', 73500],\n",
+              "       ['AssocProf', 'A', 25, 22, 'Female', 62884],\n",
+              "       ['AsstProf', 'A', 2, 0, 'Female', 72500],\n",
+              "       ['AssocProf', 'A', 10, 8, 'Female', 77500],\n",
+              "       ['AsstProf', 'A', 3, 1, 'Female', 72500],\n",
+              "       ['Prof', 'B', 36, 26, 'Female', 144651],\n",
+              "       ['AssocProf', 'B', 12, 10, 'Female', 103994],\n",
+              "       ['AsstProf', 'B', 3, 3, 'Female', 92000],\n",
+              "       ['AssocProf', 'B', 13, 10, 'Female', 103750],\n",
+              "       ['AssocProf', 'B', 14, 7, 'Female', 109650],\n",
+              "       ['Prof', 'A', 29, 27, 'Female', 91000],\n",
+              "       ['AssocProf', 'A', 26, 24, 'Female', 73300],\n",
+              "       ['Prof', 'A', 36, 19, 'Female', 117555],\n",
+              "       ['AsstProf', 'A', 7, 6, 'Female', 63100],\n",
+              "       ['Prof', 'A', 17, 11, 'Female', 90450],\n",
+              "       ['AsstProf', 'A', 4, 2, 'Female', 77500],\n",
+              "       ['Prof', 'A', 28, 7, 'Female', 116450],\n",
+              "       ['AsstProf', 'A', 8, 3, 'Female', 78500],\n",
+              "       ['AssocProf', 'B', 12, 9, 'Female', 71065],\n",
+              "       ['Prof', 'B', 24, 15, 'Female', 161101],\n",
+              "       ['Prof', 'B', 18, 10, 'Female', 105450],\n",
+              "       ['AssocProf', 'B', 19, 6, 'Female', 104542],\n",
+              "       ['Prof', 'B', 17, 17, 'Female', 124312],\n",
+              "       ['Prof', 'A', 28, 14, 'Female', 109954],\n",
+              "       ['Prof', 'A', 23, 15, 'Female', 109646]], dtype=object)"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 17
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "IaRhhEjvjtjP",
+        "outputId": "499bb253-4936-4329-d3a7-28ab461a2d8e"
+      },
+      "source": [
+        "df.size\r\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "468"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 19
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "EV2Hfti-jwJZ",
+        "outputId": "e8f75ddb-295a-4100-a4eb-ef406feabbd6"
+      },
+      "source": [
+        "df.columns\r\n",
+        "\r\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Index(['rank', 'discipline', 'phd', 'service', 'sex', 'salary'], dtype='object')"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 25
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "J2eo_uVekV55",
+        "outputId": "f18921cf-e267-4881-ea92-2dc0533e763b"
+      },
+      "source": [
+        "df.info()\r\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "<class 'pandas.core.frame.DataFrame'>\n",
+            "RangeIndex: 78 entries, 0 to 77\n",
+            "Data columns (total 6 columns):\n",
+            " #   Column      Non-Null Count  Dtype \n",
+            "---  ------      --------------  ----- \n",
+            " 0   rank        78 non-null     object\n",
+            " 1   discipline  78 non-null     object\n",
+            " 2   phd         78 non-null     int64 \n",
+            " 3   service     78 non-null     int64 \n",
+            " 4   sex         78 non-null     object\n",
+            " 5   salary      78 non-null     int64 \n",
+            "dtypes: int64(3), object(3)\n",
+            "memory usage: 3.8+ KB\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "r6xYV4JjkieR",
+        "outputId": "34f72bed-8fbf-43a8-9c9f-778f837a0a39"
+      },
+      "source": [
+        "df.std()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "phd           12.498425\n",
+              "service       12.139768\n",
+              "salary     28293.661022\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 28
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 297
+        },
+        "id": "NgI8uiLAoW2R",
+        "outputId": "c4d8eb4b-0e17-4b96-d7c8-99ea64494154"
+      },
+      "source": [
+        "df.describe()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>phd</th>\n",
+              "      <th>service</th>\n",
+              "      <th>salary</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>count</th>\n",
+              "      <td>78.000000</td>\n",
+              "      <td>78.000000</td>\n",
+              "      <td>78.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>mean</th>\n",
+              "      <td>19.705128</td>\n",
+              "      <td>15.051282</td>\n",
+              "      <td>108023.782051</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>std</th>\n",
+              "      <td>12.498425</td>\n",
+              "      <td>12.139768</td>\n",
+              "      <td>28293.661022</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>min</th>\n",
+              "      <td>1.000000</td>\n",
+              "      <td>0.000000</td>\n",
+              "      <td>57800.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>25%</th>\n",
+              "      <td>10.250000</td>\n",
+              "      <td>5.250000</td>\n",
+              "      <td>88612.500000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>50%</th>\n",
+              "      <td>18.500000</td>\n",
+              "      <td>14.500000</td>\n",
+              "      <td>104671.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>75%</th>\n",
+              "      <td>27.750000</td>\n",
+              "      <td>20.750000</td>\n",
+              "      <td>126774.750000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>max</th>\n",
+              "      <td>56.000000</td>\n",
+              "      <td>51.000000</td>\n",
+              "      <td>186960.000000</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "             phd    service         salary\n",
+              "count  78.000000  78.000000      78.000000\n",
+              "mean   19.705128  15.051282  108023.782051\n",
+              "std    12.498425  12.139768   28293.661022\n",
+              "min     1.000000   0.000000   57800.000000\n",
+              "25%    10.250000   5.250000   88612.500000\n",
+              "50%    18.500000  14.500000  104671.000000\n",
+              "75%    27.750000  20.750000  126774.750000\n",
+              "max    56.000000  51.000000  186960.000000"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 29
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "2XDevJhtodgu",
+        "outputId": "d9244659-233b-4d86-8f76-19868bca948d"
+      },
+      "source": [
+        "df.mean()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "phd            19.705128\n",
+              "service        15.051282\n",
+              "salary     108023.782051\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 32
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "A8PfzA3dolzb",
+        "outputId": "27d1824d-6657-4866-e849-66a29000f274"
+      },
+      "source": [
+        "df.head(50).mean()\r\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "phd            21.52\n",
+              "service        17.60\n",
+              "salary     113789.14\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 33
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 419
+        },
+        "id": "28sZewIjo0q7",
+        "outputId": "e0601a5a-ee57-4d44-ac6f-3ac15d96b0cc"
+      },
+      "source": [
+        "df[['phd']]"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>phd</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>56</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>12</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>23</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>40</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>...</th>\n",
+              "      <td>...</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>73</th>\n",
+              "      <td>18</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>74</th>\n",
+              "      <td>19</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>75</th>\n",
+              "      <td>17</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>76</th>\n",
+              "      <td>28</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>77</th>\n",
+              "      <td>23</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>78 rows × 1 columns</p>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    phd\n",
+              "0    56\n",
+              "1    12\n",
+              "2    23\n",
+              "3    40\n",
+              "4    20\n",
+              "..  ...\n",
+              "73   18\n",
+              "74   19\n",
+              "75   17\n",
+              "76   28\n",
+              "77   23\n",
+              "\n",
+              "[78 rows x 1 columns]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 36
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "WSJ1vSjvrtbX",
+        "outputId": "d72d2708-ad44-4337-b68f-06af3bfffe7f"
+      },
+      "source": [
+        "df.phd.describe()\r\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "count    78.000000\n",
+              "mean     19.705128\n",
+              "std      12.498425\n",
+              "min       1.000000\n",
+              "25%      10.250000\n",
+              "50%      18.500000\n",
+              "75%      27.750000\n",
+              "max      56.000000\n",
+              "Name: phd, dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 37
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "psOqEjWLsJur",
+        "outputId": "eea0457c-00e4-4bb1-9739-1a69ad553adb"
+      },
+      "source": [
+        "df.phd.count()\r\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "78"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 38
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "KSgAaNdYsMtD",
+        "outputId": "225ca857-5326-462f-ed2d-9ce021e410b3"
+      },
+      "source": [
+        "df.phd.mean()\r\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "19.705128205128204"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 39
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 173
+        },
+        "id": "EZdGBhTDsRpW",
+        "outputId": "5dfc1b82-4b1b-44be-8ff9-d9f0ab9ce478"
+      },
+      "source": [
+        "df.groupby(['rank']).mean()"
+      ],
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>phd</th>\n",
+              "      <th>service</th>\n",
+              "      <th>salary</th>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>rank</th>\n",
+              "      <th></th>\n",
+              "      <th></th>\n",
+              "      <th></th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>AssocProf</th>\n",
+              "      <td>15.076923</td>\n",
+              "      <td>11.307692</td>\n",
+              "      <td>91786.230769</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>AsstProf</th>\n",
+              "      <td>5.052632</td>\n",
+              "      <td>2.210526</td>\n",
+              "      <td>81362.789474</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>Prof</th>\n",
+              "      <td>27.065217</td>\n",
+              "      <td>21.413043</td>\n",
+              "      <td>123624.804348</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "                 phd    service         salary\n",
+              "rank                                          \n",
+              "AssocProf  15.076923  11.307692   91786.230769\n",
+              "AsstProf    5.052632   2.210526   81362.789474\n",
+              "Prof       27.065217  21.413043  123624.804348"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 11
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 173
+        },
+        "id": "SO0GymF1v4tN",
+        "outputId": "1e1fc8b0-62e6-4897-dde9-19b71fe15bb2"
+      },
+      "source": [
+        "df.groupby(['rank'])[['phd','salary']].mean()"
+      ],
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>phd</th>\n",
+              "      <th>salary</th>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>rank</th>\n",
+              "      <th></th>\n",
+              "      <th></th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>AssocProf</th>\n",
+              "      <td>15.076923</td>\n",
+              "      <td>91786.230769</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>AsstProf</th>\n",
+              "      <td>5.052632</td>\n",
+              "      <td>81362.789474</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>Prof</th>\n",
+              "      <td>27.065217</td>\n",
+              "      <td>123624.804348</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "                 phd         salary\n",
+              "rank                               \n",
+              "AssocProf  15.076923   91786.230769\n",
+              "AsstProf    5.052632   81362.789474\n",
+              "Prof       27.065217  123624.804348"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 12
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3e-T9j9RwI65",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 419
+        },
+        "outputId": "f1099a51-1285-437a-9f44-c20dde8bc536"
+      },
+      "source": [
+        "df[['sex']]"
+      ],
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>sex</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>Male</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>Male</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>Male</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>Male</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>Male</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>...</th>\n",
+              "      <td>...</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>73</th>\n",
+              "      <td>Female</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>74</th>\n",
+              "      <td>Female</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>75</th>\n",
+              "      <td>Female</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>76</th>\n",
+              "      <td>Female</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>77</th>\n",
+              "      <td>Female</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>78 rows × 1 columns</p>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "       sex\n",
+              "0     Male\n",
+              "1     Male\n",
+              "2     Male\n",
+              "3     Male\n",
+              "4     Male\n",
+              "..     ...\n",
+              "73  Female\n",
+              "74  Female\n",
+              "75  Female\n",
+              "76  Female\n",
+              "77  Female\n",
+              "\n",
+              "[78 rows x 1 columns]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "oVKHW2yiTqy7",
+        "outputId": "ebda7eff-7f29-43ba-b646-42cc45c89801"
+      },
+      "source": [
+        "df.var()"
+      ],
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "phd        1.562106e+02\n",
+              "service    1.473740e+02\n",
+              "salary     8.005313e+08\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sD-UzAiRW-8S",
+        "outputId": "7f5699ac-e2bb-409c-a1a0-17714a841d74"
+      },
+      "source": [
+        "df.skew()"
+      ],
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "phd        0.634366\n",
+              "service    0.913750\n",
+              "salary     0.452103\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 15
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RFO1NhkGXOcs",
+        "outputId": "28b5b262-7f97-40d1-9f8e-5da708e00f2d"
+      },
+      "source": [
+        "df.kurt()"
+      ],
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "phd        0.042504\n",
+              "service    0.608981\n",
+              "salary    -0.401713\n",
+              "dtype: float64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 16
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 286
+        },
+        "id": "DRB8K4GnXRqe",
+        "outputId": "007bc529-55da-4dbd-90c9-e244d2522281"
+      },
+      "source": [
+        "sns.heatmap(df.corr())"
+      ],
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<matplotlib.axes._subplots.AxesSubplot at 0x7fe3dd6ab160>"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 17
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "image/png": "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\n",
+            "text/plain": [
+              "<Figure size 432x288 with 2 Axes>"
+            ]
+          },
+          "metadata": {
+            "tags": [],
+            "needs_background": "light"
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "UZUuG8NNYE40"
+      },
+      "source": [
+        "x = df.iloc[:,[2,3]].values"
+      ],
+      "execution_count": 25,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XLmJ3m09Ypl0"
+      },
+      "source": [
+        "y = df.iloc[:,5].values"
+      ],
+      "execution_count": 26,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 286
+        },
+        "id": "5hzxVNpvaUST",
+        "outputId": "2d05f9c3-07cf-4842-d136-6a4037ca6def"
+      },
+      "source": [
+        "sns.heatmap(df.corr())\r\n"
+      ],
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<matplotlib.axes._subplots.AxesSubplot at 0x7fe3d8bd8fd0>"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 27
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "image/png": "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\n",
+            "text/plain": [
+              "<Figure size 432x288 with 2 Axes>"
+            ]
+          },
+          "metadata": {
+            "tags": [],
+            "needs_background": "light"
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "QMkedB16aYb8"
+      },
+      "source": [
+        "from sklearn.model_selection import train_test_split\r\n",
+        "X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 1/3, random_state = 0)\r\n"
+      ],
+      "execution_count": 28,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "YcbSgUUDarKu"
+      },
+      "source": [
+        "from sklearn.preprocessing import StandardScaler\r\n",
+        "sc_X = StandardScaler()\r\n",
+        "X_train = sc_X.fit_transform(X_train)\r\n",
+        "X_test = sc_X.transform(X_test)"
+      ],
+      "execution_count": 30,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8T2GL186bHBC",
+        "outputId": "57b57032-5e2f-44f0-fc9e-be924fd3f930"
+      },
+      "source": [
+        "from sklearn.linear_model import LinearRegression\r\n",
+        "LinearRegression = LinearRegression()\r\n",
+        "LinearRegression.fit(X_train, y_train)"
+      ],
+      "execution_count": 36,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 36
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "5aRqVCYpcQoe",
+        "outputId": "9a2766a6-8383-41a3-8b53-cf4fe6c2cbe0"
+      },
+      "source": [
+        "y_pred = LinearRegression.predict(X_test)\r\n",
+        "y_pred"
+      ],
+      "execution_count": 37,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([103131.68496359, 138124.80228196,  94295.21718007, 118644.98668112,\n",
+              "       113172.73943631, 123149.28497978, 107059.49348934, 103432.83163589,\n",
+              "       103432.83163589,  86990.28632975, 131121.01810395, 101888.39291683,\n",
+              "       111641.2025031 ,  93981.16872192,  95512.70565512,  98549.97594983,\n",
+              "       134145.3866128 ,  88207.7748048 , 104650.32011094, 134721.8763857 ,\n",
+              "        88207.7748048 ,  87906.6281325 , 100068.61109718, 113146.93586461,\n",
+              "       114076.17945321,  88810.0681494 ])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 37
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ZkDzLeY7ceiO",
+        "outputId": "2a37d3e3-4d82-46c6-91a3-781cff79f60e"
+      },
+      "source": [
+        "from sklearn import metrics\r\n",
+        "print('MAE:', metrics.mean_absolute_error(y_test,y_pred))\r\n",
+        "print('MSE:', metrics.mean_squared_error(y_test,y_pred))\r\n",
+        "print('RMSE;', np.sqrt(metrics.mean_absolute_error(y_test,y_pred)))"
+      ],
+      "execution_count": 40,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "MAE: 14390.054004410711\n",
+            "MSE: 326453209.6354928\n",
+            "RMSE; 119.95855119336308\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4xZTKM3bc5UX"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
