@@ -1,0 +1,25 @@
+#namedataset
+Q7 <- datasets::Q7
+head(Q7,10)
+#Summary and Mean median for Score
+summary(Q7$Score)
+#Summary and Mean median for Points
+summary(Q7$Points)
+#Summary and Mean median for weight 
+summary(Q7$Weigh)
+#ploting the data for score
+plot(Q7$Score)
+#ploting the data for points        
+plot(Q7$Points)
+#ploting the data for weigh
+plot(Q7$Weigh)
+#histogram for score
+hist(Q7$Score)
+#Histogram for Points
+hist(Q7$Score,
+     main = 'SCORES OF VEHICLES',
+     xlab = 'VEHICLES. ', col='blue')
+#whole summary
+summary(Q7)     
+     
+     
